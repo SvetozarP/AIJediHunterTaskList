@@ -1,0 +1,76 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Progress bar -->
+{% if total %}
+  {% with pct=completed|divisibleby:total %}
+  {% endwith %}
+{% endif %}
+{% with percent=completed|floatformat:2 %}
+{% endwith %}
+
+<div class="w-full max-w-xl mb-8">
+  <div class="relative h-4 rounded-full bg-gray-700 overflow-hidden">
+    <!-- lightsaber blade -->
+    <div class="absolute inset-0 bg-cyan-400 transition-all duration-300"
+        style="width:{{ percent }}%">
+    </div>
+    <!-- lightsaber hilt -->
+    <div class="absolute -left-6 top-0 h-4 w-6 bg-gray-900 border border-gray-600 rounded-l"></div>
+  </div>
+  <p class="text-sm text-gray-400 mt-1">{{ completed }} / {{ total }} tasks complete</p>
+</div>
+
+<p class="text-sm text-gray-400 mt-1">
+  {{ completed }} / {{ total }} tasks complete — {{ percent|floatformat:0 }}%
+</p>
+
+<!--Add task button-->
+<div class="mb-6 flex gap-4">
+  <!-- manual task -->
+  <a href="{% url 'add_task' %}"
+     class="px-4 py-2 bg-yellow-500 text-black rounded hover:bg-yellow-400">
+     + Add New Task
+  </a>
+
+  <!-- random task -->
+  <form action="{% url 'add_random_task' %}" method="post">
+    {% csrf_token %}
+    <button type="submit"
+      class="px-4 py-2 bg-cyan-500 text-black rounded hover:bg-cyan-400">
+      + Add Random Task
+    </button>
+  </form>
+</div>
+
+<!-- Task list -->
+<ul class="space-y-4 w-full max-w-xl">
+  {% for task in tasks %}
+    <li class="flex items-start gap-3 bg-gray-900 p-4 rounded-lg border border-gray-700">
+      <form action="{% url 'toggle_task' task.pk %}" method="post">
+        {% csrf_token %}
+        <button class="w-5 h-5 border-2 rounded-sm
+          {% if task.is_completed %}
+            bg-cyan-400
+          {% else %}
+            border-gray-500
+          {% endif %}"
+          title="Mark complete"></button>
+      </form>
+
+        <p class="text-sm {% if task.is_completed %}line-through text-gray-500{% endif %}">
+            Go to planet <span class="text-yellow-300">{{ task.planet_name }}</span>
+            and {{ task.verb }} <span class="text-red-400">{{ task.character_name }}</span>
+            using ship <span class="text-green-400">{{ task.ship_name }}</span>.
+        </p>
+        <form action="{% url 'delete_task' task.pk %}" method="post" class="inline ml-auto">
+            {% csrf_token %}
+            <button type="submit" title="Delete task" class="text-red-500 hover:text-red-700">
+            🗑️
+            </button>
+        </form>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black text-white">
+<head>
+  <meta charset="UTF-8">
+  <title>Jedi Hunter</title>
+
+  <!-- ✅ Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ✅ Star Wars font -->
+  <link href="https://fonts.cdnfonts.com/css/star-jedi" rel="stylesheet">
+
+  <style>
+    /* Apply Star Wars font */
+    .star-wars-font {
+      font-family: 'Star Jedi', sans-serif;
+      color: #ffe81f;
+      text-shadow:
+        0 0 2px #ffe81f,
+        0 0 4px #ffe81f,
+        0 0 6px #f0f028,
+        0 0 8px #f0f028;
+    }
+
+    header.star-wars-font {
+      font-weight: 900;
+      letter-spacing: 0.15em;
+    }
+
+    /* Galaxy background */
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('https://img.freepik.com/premium-photo/abstract-flight-space-hyper-jump-3d-illustration_250994-2476.jpg')
+                  no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      font-family: sans-serif;
+    }
+
+    .card {
+      background-color: rgba(15, 15, 15, 0.85);
+      border: 1px solid #444;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+    }
+
+    .glass {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      border-radius: 1rem;
+      padding: 1.5rem;
+    }
+
+    main {
+      background-color: rgba(0,0,0,0.75);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow:
+      0 0 10px #ffe81f,
+      0 0 20px #ffe81f inset;
+    }
+
+    footer {
+      color: #888;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start p-6 space-y-4">
+
+  <!-- Header -->
+  <header class="star-wars-font text-yellow-400 text-5xl text-center drop-shadow-md mb-10">
+    🌌 Jedi Hunter Tasks
+  </header>
+
+  <!-- Main content centered horizontally -->
+  <main class="w-full max-w-3xl glass flex flex-col items-center">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Optional Footer -->
+  <footer class="mt-10 text-sm text-gray-400 text-center w-full">
+    May the Force be with you.
+  </footer>
+
+</body>
+
+</html>

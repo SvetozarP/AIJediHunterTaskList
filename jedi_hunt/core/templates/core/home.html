@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="bg-gray-900 p-6 rounded-xl shadow-xl max-w-xl w-full">
+  <h2 class="text-xl font-semibold mb-4">🗡️ Missions</h2>
+
+  <ul class="space-y-3">
+    {% for task in tasks %}
+      <li class="bg-gray-800 p-3 rounded border border-gray-700">
+        <span class="text-yellow-300">Task {{ forloop.counter }}:</span>
+        <span>{{ task }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
