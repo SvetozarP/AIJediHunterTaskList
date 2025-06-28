@@ -22,7 +22,7 @@ A Django-based web application for managing and tracking Jedi hunting tasks.
 1. Clone the repository:
    ```bash
    git clone https://github.com/SvetozarP/AIJediHunterTaskList
-   cd AIJediHunterTaskList
+   cd AIJediHunterTaskList/jedi_hunt
    ```
 2. Install dependencies:
    ```bash
@@ -30,7 +30,6 @@ A Django-based web application for managing and tracking Jedi hunting tasks.
    ```
 3. Apply migrations:
    ```bash
-   cd jedi_hunt
    python manage.py migrate
    ```
 4. Run the development server:
